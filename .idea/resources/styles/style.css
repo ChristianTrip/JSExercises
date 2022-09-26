@@ -2,6 +2,12 @@ body {
     font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 
+#github-link{
+    margin-left: 10%;
+    color : white;
+    text-align: center;
+}
+
 nav {
     overflow: hidden;
     background-color: #333;

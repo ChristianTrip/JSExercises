@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../styles/style.css" type="text/css" rel="stylesheet">
-    <title>Day 1, Exercise 3</title>
+    <title>Day 1, Exercise 2</title>
 </head>
 <body>
 <nav>
@@ -33,63 +33,25 @@
                 <a href="js-day2-ex4.html">Exercise 4</a>
             </div>
         </div>
+
     </div>
     <div id="my-name">Christian Trip | chri78je@stud.kea.dk</div>
 </nav>
 
 <main>
     <header>
-        <h1>Exercise 3</h1>
-        <p>Using map to create list’s<br>(ul’s, tables etc.)</p>
+        <h1>Exercise 5</h1>
+        <p>Implement a simple calculator</p>
     </header>
 
     <section>
 
-        <form>
-            <div id="input-field">
-            <label>Input name : </label>
-            <input id="name-input" type="text">
-            </div>
-            <br>
-            <button id="add">Add name</button>
-            <button id="rm-first">Remove first</button>
-            <button id="rm-last">Remove last</button>
-        </form>
-        <ul id="name-list">
-
-        </ul>
     </section>
 
 </main>
 
 
 <script>
-
-    const names = ["Kurt", "Mikael", "Bo", "Lina", "Elvis"];
-
-    function createList(){
-        document.getElementById("name-list").innerHTML = names.map(name => `<li>${name}</li>`).join("");
-    }
-    createList();
-
-
-    document.getElementById("add").onclick = (evt ) => {
-        evt.preventDefault();
-        const newName = document.getElementById("name-input").value;
-        names.push(newName);
-        createList();
-    }
-    document.getElementById("rm-first").onclick = (evt ) => {
-        evt.preventDefault()
-        names.shift()
-        createList()
-    }
-    document.getElementById("rm-last").onclick = (evt ) => {
-        evt.preventDefault()
-        names.pop()
-        createList()
-    }
-
 
 </script>
 
