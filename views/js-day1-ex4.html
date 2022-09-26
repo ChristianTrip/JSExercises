@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+    <title>Day 1, Exercise 4</title>
+</head>
+<body>
+<nav>
+    <div id="github-link">
+        <a href="https://github.com/ChristianTrip/JSExercises">GitHub</a>
+    </div>
+    <div id="menu">
+        <div class="dropdown">
+            <button id="day1-btn" class="dropbtn">Day 1
+            </button>
+            <div class="dropdown-content">
+                <a href="../../index.html">Exercise 1</a>
+                <a href="js-day1-ex2.html">Exercise 2</a>
+                <a href="js-day1-ex3.html">Exercise 3</a>
+                <a href="js-day1-ex4.html">Exercise 4</a>
+                <a href="js-day1-ex5.html">Exercise 5</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button id="day2-btn" class="dropbtn">Day 2
+            </button>
+            <div class="dropdown-content">
+                <a href="js-day2-ex1.html">Exercise 1</a>
+                <a href="js-day2-ex2.html">Exercise 2</a>
+                <a href="js-day2-ex3.html">Exercise 3</a>
+                <a href="js-day2-ex4.html">Exercise 4</a>
+            </div>
+        </div>
+    </div>
+    <div id="my-name">Christian Trip | chri78je@stud.kea.dk</div>
+</nav>
+
+<main>
+    <header>
+        <h1>Exercise 4</h1>
+        <p>Using map, filter and sort to create dynamic table-rows</p>
+    </header>
+
+    <section>
+        <table class="table">
+            <thead id="header">
+            <tr>
+                <th id="header-id">ID</th>
+                <th id="header-year">Year</th>
+                <th id="header-make">Make</th>
+                <th id="header-model">Model</th>
+                <th id="header-price">Price</th>
+            </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <div><label for="filter-price">Price</label><input id="filter-price">
+            <button id="btn-filter-price">Price less than</button>
+            <button id="btn-clear-filter">Clear Filter</button>
+        </div>
+    </section>
+
+</main>
+
+
+<script>
+
+
+    const cars = [
+        {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+        {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+        {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+        {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+        {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+    ];
+    function makeTableRows(carsToMap) {
+        const tableRows = carsToMap.map(car => `
+     <tr>
+       <td>${car.id}</td>
+       <td>${car.year}</td>
+       <td>${car.make}</td>
+       <td>${car.model}</td>
+       <td>${car.price}</td>
+     </tr>
+    `).join("\n")
+        document.getElementById("tbody").innerHTML = tableRows
+    }
+    makeTableRows(cars)
+
+    document.getElementById("btn-filter-price").onclick = () => {
+        const price = document.getElementById("filter-price").value
+        const filteredCars = cars.filter(car => car.price < price)
+        makeTableRows(filteredCars)
+    }
+
+    document.getElementById("btn-clear-filter").onclick = function(){
+        makeTableRows(cars)
+    }
+    let sortOrderMake = 1
+    document.getElementById("header-make").onclick = function(){
+        const sortedCars = cars.sort((a,b)=> {
+            let sortResult =0
+            if (a.make < b.make) sortResult =  -1
+            if (a.make > b.make) sortResult= 1
+            sortResult *= sortOrderMake
+            return sortResult
+        })
+        sortOrderMake *= -1
+        makeTableRows(sortedCars)
+    }
+
+    document.getElementById("header-year").onclick = function(){
+        const sortedCars = cars.sort((a, b)=> {
+            let sortResult =0
+            if (a.year < b.year) sortResult =  -1
+            if (a.year > b.year) sortResult= 1
+            sortResult *= sortOrderMake
+            return sortResult
+        })
+        sortOrderMake *= -1
+        makeTableRows(sortedCars)
+    }
+
+    document.getElementById("header-id").onclick = function(){
+        const sortedCars = cars.sort((a, b)=> {
+            let sortResult =0
+            if (a.id < b.id) sortResult =  -1
+            if (a.id > b.id) sortResult= 1
+            sortResult *= sortOrderMake
+            return sortResult
+        })
+        sortOrderMake *= -1
+        makeTableRows(sortedCars)
+    }
+
+    document.getElementById("header-model").onclick = function(){
+        const sortedCars = cars.sort((a, b)=> {
+            let sortResult =0
+            if (a.model < b.model) sortResult =  -1
+            if (a.model > b.model) sortResult= 1
+            sortResult *= sortOrderMake
+            return sortResult
+        })
+        sortOrderMake *= -1
+        makeTableRows(sortedCars)
+    }
+
+    document.getElementById("header-price").onclick = function(){
+        const sortedCars = cars.sort((a, b)=> {
+            let sortResult =0
+            if (a.price < b.price) sortResult =  -1
+            if (a.price > b.price) sortResult= 1
+            sortResult *= sortOrderMake
+            return sortResult
+        })
+        sortOrderMake *= -1
+        makeTableRows(sortedCars)
+    }
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript" src="../scripts/day1.js"></script>
+</body>
+
+</html>
