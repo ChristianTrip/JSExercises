@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+
+    <title>Day 2, Exercise 3</title>
+</head>
+<body>
+<nav>
+    <div id="menu">
+        <div class="dropdown">
+            <button id="day1-btn" class="dropbtn">Day 1
+            </button>
+            <div class="dropdown-content">
+                <a href="index.html">Exercise 1</a>
+                <a href="js-day1-ex2.html">Exercise 2</a>
+                <a href="js-day1-ex3.html">Exercise 3</a>
+                <a href="js-day1-ex4.html">Exercise 4</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button id="day2-btn" class="dropbtn">Day 2
+            </button>
+            <div class="dropdown-content">
+                <a href="js-day2-ex1.html">Exercise 1</a>
+                <a href="js-day2-ex2.html">Exercise 2</a>
+                <a href="js-day2-ex3.html">Exercise 3</a>
+            </div>
+        </div>
+
+    </div>
+    <div id="my-name">Christian Trip | chri78je@stud.kea.dk</div>
+</nav>
+
+<main>
+    <header>
+        <h1>Exercise 3</h1>
+        <p>------------------------------</p>
+    </header>
+
+    <section>
+        <input id="input-id" type="text" placeholder="Enter id" />&nbsp
+        <button id="btn-get-user">Get user</button>
+        <button id="btn-get-all">Get all</button>
+
+        <div id="all-user-content" style="display: none;">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+        <div id="single-user-content" style="display:none;">
+            <h3>Details</h3>
+            <p id="p-name"></p>
+            <p id="p-email"></p>
+            <p id="p-error" style="color:red"></p>
+        </div>
+    </section>
+
+</main>
+
+
+<script>
+    const URL = "https://jsonplaceholder.typicode.com/users/"
+    document.getElementById("btn-get-user").onclick = getUser;
+    document.getElementById("btn-get-all").onclick = getAll;
+
+    function getUser() {
+        document.getElementById("p-error").innerText = ""
+        const id = document.getElementById("input-id").value
+        document.getElementById("all-user-content").style.display = "none"
+        document.getElementById("single-user-content").style.display = "block"
+        if (!id) {
+            document.getElementById("p-error").innerText = "Please provide an id"
+            return
+        }
+        fetch(URL + id)
+            .then(res => {
+                if (!res.ok) {
+                    return Promise.reject("Could not find user")
+                }
+                return res.json()
+            })
+            .then(user => {
+                const content = document.getElementById("single-user-content")
+                document.getElementById("p-name").innerText = user.name
+                document.getElementById("p-email").innerText = user.email
+            })
+            .catch(e => {
+                console.log("Error", e)
+                const node = document.getElementById("p-error")
+                node.innerText = e
+            })
+    }
+
+    function getAll() {
+        document.getElementById("single-user-content").style.display = "none"
+        fetch(URL)
+            .then(res => res.json()) //No error handling
+            .then(users => {
+                const rows = users.map(u => `
+          <tr>
+            <td>${u.name}</td>
+            <td>${u.phone}</td>
+          </tr>
+          `).join("")
+
+                document.getElementById("all-user-content").style = "block"
+                document.getElementById("tbody").innerHTML = rows
+            })
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript" src="../scripts/day2.js"></script>
+</body>
+
+</html>
